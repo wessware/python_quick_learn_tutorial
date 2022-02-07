@@ -1,6 +1,12 @@
 """
 Learn python essentials in a 'few' lines of code
 Comment out each separate section to run separate blocks
+
+
+
+
+PART ONE 
+Intrdouction to basic python! Variables & data structures
 """
 print('Hello git')
 
@@ -127,3 +133,7 @@ years_on = int(years_on)
 
 constant = input('Your favorite mathematics constant? ')
 constant = float(constant)
+
+# END OF PART ONE
+
+# BEGINNING OF PART TWO
