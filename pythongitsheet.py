@@ -325,3 +325,58 @@ for language in languages:
 for web_language in web_languages:
     print(web_language + " is good for web programming!")
 print('A good combination of any is most suitable.')
+
+# THIRD SESSION - CONTINUATION - LIST OPERATIONS
+
+# the range() function
+for number in range(12):  # range starts from 0
+    print(number)
+
+for number in range(1, 12):  # range can start anywhere
+    print(number)
+
+numbers = list(range(1, 12))  # making a list of number in a certain range
+
+# trivial arithmetics on lists
+ages = [93, 2, 6, 1, 98, 45, 13, 24, 46, 23, 18]
+youngest = min(ages)
+oldest = max(ages)
+sum_age = sum(ages)
+print(youngest, oldest, sum_age)
+
+# slicing a list
+# languages & web_languages are predefined lists from above
+first_three_lang = languages[:3]
+last_three_lang = web_languages[-3:]
+print(first_three_lang, last_three_lang)
+
+# copying a list
+print(languages)
+copy_lang = languages[:]
+print(copy_lang)
+
+# using a loop to generate a list
+squares = []
+for x in range(1, 12):
+    square = x**2
+    squares.append(square)
+print(squares)
+
+squares = [x**2 for x in range(1, 12)]  # alternative expression
+
+#uppercase & lowercase
+lang_upper = []
+for language in languages:
+    lang_upper.append(language.upper())
+    print(lang_upper)
+
+# alternative expression
+upper_alt = [language.upper() for language in languages]
+print(upper_alt)
+
+# PYTHON TUPLES - IMMUTABLE LISTS
+lang_tup = ('python', 'c', 'c++', 'c#', 'f#', 'java',
+            'javascript', 'php', 'r', 'haskel')
+
+for lang in lang_tup:
+    print(lang)
