@@ -5,7 +5,8 @@ Comment out each separate section to run separate blocks
 PART ONE 
 Intrdouction to basic python! Variables & data structures
 """
-from numpy import sort
+from typing import OrderedDict
+from numpy import full, sort
 
 
 print('Hello git')
@@ -380,3 +381,154 @@ lang_tup = ('python', 'c', 'c++', 'c#', 'f#', 'java',
 
 for lang in lang_tup:
     print(lang)
+
+# PYTHON DICTIONARIES - KEY - VALUE DATA STRUCTURES FOR STORING RELATED INFORMATION
+lang_cat = {'bootstrap': 'web', 'python': 'data'}  # creating a dictionary
+print(lang_cat)
+
+# accesssing values using Keys
+lang_cat1 = lang_cat.get('bootstrap')
+print(lang_cat1)
+lang_cat2 = lang_cat.get('python', 0)
+print(lang_cat2)
+
+# adding value and key to a dictionary
+lang_cat['java'] = 'android'
+lang_cat['kotlin'] = 'android_new'
+lang_cat['spss'] = 'statistics'
+print(lang_cat)
+
+# adding value and key to an empty dictionary
+lang_android = {}
+lang_android['java'] = 'old'
+lang_android['kotlin'] = 'new'
+print(lang_android)
+
+# modifying values in a dictionary
+lang_android['java'] = 'current'
+lang_android['kotlin'] = 'future'
+print(lang_android)
+
+# deleting a value from a dictionary
+del lang_android['java']
+print(lang_android)
+
+# looping through a dictionary; using key & value
+lang_cat['c'] = 'hardware'
+lang_cat['matlab'] = 'mathematics'
+lang_cat['css'] = 'web styling'
+
+for language, use in lang_cat.items():
+    print(language + ' : ' + use)
+
+# looping using keys
+for language in lang_cat.keys():
+    print(language)
+# looping using values
+for use in lang_cat.values():
+    print(use)
+# looping through all keys in order
+for use in sorted(lang_cat.keys()):
+    print(use + ' : ' + language)
+
+# length of a dictionary
+dic_len = print(len(lang_cat))
+
+# Advanced dictionary operations
+# A list of dictionaries
+reg_memb = []
+
+reg_1 = {
+    'first': 'james',
+    'last': 'kundu',
+    'username': 'k_james'
+}
+reg_memb.append(reg_1)
+reg_2 = {
+    'first': 'domm',
+    'second': 'lukaku',
+    'username': 'd_lukaku'
+}
+reg_memb.append(reg_2)
+
+# dispalying users currently added to the dictionary
+for reg_user in reg_memb:
+    for i, j in reg_user.items():
+        print(i + ' : ' + j)
+    print('\n')
+
+# alternative list of dictionaries
+reg_member = [
+    {
+        'first': 'wareng',
+        'last': 'ware',
+        'username': 'wareng_ware'
+    },
+    {
+        'first': 'Indika',
+        'last': 'futu',
+        'username': 'indika_futu'
+    },
+]
+for reg in reg_member:
+    for x, y in reg.items():
+        print(x + " : " + y)
+    print('\n')
+
+# lists in a dictionary
+cat_lang = {
+    'web': ['javascript', 'html', 'css', 'vue'],
+    'backend': ['node', 'php', 'django'],
+    'android': ['kotlin', 'java'],
+    'data': ['python', 'r', 'triton']
+}
+for cat, langs in cat_lang.items():
+    print(cat + ' languages: ')
+    for lang in langs:
+        print('- ' + lang)
+
+# dictionary of dictionaries
+user_dict = {
+    'k_lukaku': {
+        'first': 'kevin',
+        'last': 'lukaku',
+        'location': 'maseno'
+    },
+    'indika_futu': {
+        'first': 'indika',
+        'last': 'futu',
+        'location': 'mundika'
+    },
+    'wareng_ware': {
+        'first': 'wareng',
+        'last': 'ware',
+        'location': 'torengista'
+    },
+    'ochiengi_r': {
+        'first': 'reynold',
+        'last': 'ochiengi',
+        'location': 'ngibo'
+    },
+}
+for username, usr_dict in user_dict.items():
+    print('\nUsername: ' + username)
+    full_name = usr_dict['first'] + " "
+    full_name += usr_dict['last']
+    location = usr_dict['location']
+
+    print('\tFull name: ' + full_name.title())
+    print('\tLocation: ' + location.title())
+
+# ordered dictionaries
+# presenting items in the order in which they appeared, FIFO
+new_lang = OrderedDict()
+
+new_lang['triton'] = ['data', 'mathematics', 'statistics']
+new_lang['js'] = ['web_front', 'web_back', 'data']
+new_lang['kotlin'] = ['android']
+new_lang['julia'] = ['data', 'software', 'android']
+
+for cat, lang in new_lang.items():
+    print(cat + ' : ')
+    for langs in lang:
+        print('- ' + langs)
