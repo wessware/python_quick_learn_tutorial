@@ -5,6 +5,9 @@ Comment out each separate section to run separate blocks
 PART ONE 
 Intrdouction to basic python! Variables & data structures
 """
+from argparse import Action
+from distutils.ccompiler import new_compiler
+from email import message
 from typing import OrderedDict
 from numpy import full, sort
 
@@ -532,3 +535,296 @@ for cat, lang in new_lang.items():
     print(cat + ' : ')
     for langs in lang:
         print('- ' + langs)
+
+# IF STATEMENTS & WHILE LOOPS IN PYTHON
+"""
+IF statements help in assessing the current status of a program(software) and responding
+appropriately to that staticmethod
+While loops will keep on running as long a certain condition remains true either in 
+the program or on the user's side
+"""
+# checking for equality & inequality
+# True
+sedan = 'axio'
+sedan == 'axio'
+# True
+suv = 'forester'
+suv == 'x6'
+# True
+sedan.upper() == 'axio'
+# False
+machine_learn = 'random_forest'
+machine_learn != 'neural_networks'
+# True
+age = 18
+age == 18
+# False
+age != 18
+# True
+age = 19
+age < 21
+# True
+age <= 21
+# False
+age > 21
+# False
+age >= 21
+# False
+age_me = 23
+age_her = 18
+age_me >= 21 and age_her >= 21
+# True
+age_me >= 23 and age_her >= 19
+# True
+js_langs = ['node', 'vue', 'react', 'next', 'redux']
+'node' in js_langs
+# False
+'bootstrap' in js_langs
+
+# Boolean values
+"""
+A bool is either True of False; this variables are used to track certain conditions within 
+a program
+git_user = True
+can_commit = True
+can_stack = False
+"""
+# if statements
+age_her = 19
+if age >= 18:
+    print('You are old enough to get married!')
+
+# if-else statements
+age_her = 26
+
+if age_her >= 25:
+    print('You should be married by now!')
+else:
+    print('You should be preparing to get married!')
+
+# if-elif-else statements
+age_her = 30
+
+if age_her < 18:
+    print('Keep learing from your father!')
+elif age < 24:
+    print('You should be dating someone who resembles your father.')
+else:
+    print('You should have found a suitable partner and settled down!')
+
+# conditional tests with lists
+blocked_users = ['gitaa', 'kegaa', 'keg', 'tatala']
+currrent_users = 'netati'
+
+if currrent_users not in blocked_users:
+    print('You can push your code')
+
+# checking if a list is empty
+contributors = []
+
+if contributors:
+    for contributor in contributors:
+        print('Contributor: ' + contributor.title())
+else:
+    print('You have not recruited any contributors yet!')
+
+# WHILE LOOPS
+count_num = 1
+
+while count_num <= 5:
+    print(count_num)
+    count_num += 1
+
+# letting the user choose when to exit the program
+# remove docstring operator to run this code snippet
+"""
+prompt = '\nTell me something and I will '
+prompt += '\nrepeat it back to you.'
+prompt += '\nEnter quit to exit the program. '
+
+message = ''
+while message != 'quit':
+    message = input(prompt)
+
+    if message != 'quit':
+        print(message)
+"""
+# using a flag to check the status of the program
+# remove docstring to run this code snippet
+"""
+prompt = '\nTell me something and I will '
+prompt += '\nrepeat it back to you.'
+prompt += '\nEnter quit to exit the program. '
+
+active = True
+while active:
+    mesage = input(prompt)
+
+    if message == 'quit':
+        active = False
+    else:
+        print(message)
+"""
+
+# using break to exit a loop
+# remove docstring operators to run this code snippet
+"""
+prompt = '\nWhat is your favorite ML model? '
+prompt == '\nEnter quit to exit the program '
+
+while True:
+    model = input(prompt)
+
+    if model == 'quit':
+        break
+    else:
+        print('My favorite ML model is ' + model + '!')
+"""
+# use of continue in a loop
+# remove docstring operators to run this code snippet
+"""
+fav_models = ['RF', 'XGB', 'LR', 'SVM', 'RNN', 'CNN']
+
+prompt = '\nAdd more ML models.'
+prompt += '\nEnter quit when there is no more '
+
+new_models = []
+while True:
+    model = input(prompt)
+    if model == 'quit':
+        break
+    elif model in fav_models:
+        print('You have already selected the' + model + 'model!')
+        continue
+    else:
+        new_models.append(model)
+
+print('Your models:')
+for model in new_models:
+    print(model)
+"""
+# infnite loops - if a stopping condition for while loops is not provided, then they are bound to run 'forever'
+# An infinite loop - avoid running this snippet - unless you really have to!
+"""
+while True:
+    question = input('\nAre you stupid? Y/N')
+    print(question + ' I am!')
+"""
+
+# deleting instances from a list
+week_diet = ['fish', 'pork', 'sardines',
+             'pork', 'pork', 'eggs', 'beef', 'pork']
+
+print(week_diet)
+
+while 'pork' in week_diet:
+    week_diet.remove('pork')
+print(week_diet)
+
+# COMPREHENSIVE PYTHON FUNCTIONS
+# defining a function
+
+
+def welcome_novice():
+    print('welcome to GitHub, novice!')
+
+
+welcome_novice()
+# passing information to a function - single argument
+
+
+def greet_novice(username):
+    print('Welcome, ' + username + '!')
+
+
+greet_novice('kevin_k')
+greet_novice('jnn_g')
+greet_novice('awi_c')
+
+# positional and keyword arguments
+# poistional arguments - accessed according to order in function definition
+
+
+def your_passions(track, tool):
+    print('I have passion in ' + track + '.')
+    print('I want to learn ' + tool + '.')
+
+
+your_passions('web backend', 'node')
+your_passions('containerization', 'docker')
+# keyword arugments - order of access does not matter
+
+
+def your_expertise(track, language):
+    print('I have expertise in ' + track + '.')
+    print('I use ' + language + '.')
+
+
+your_expertise(track='Data Science', language='Python')
+your_expertise(track='Software Development', language='Javascript')
+
+# default values in functions
+
+
+def other_skills(skill, tool='XD'):
+    print('I have other skills in ' + skill + '.')
+    print('I use ' + tool + ' for this skill.')
+
+
+other_skills('graphic design', 'photoshop')
+other_skills('UI/UX')
+
+# making arguments optional using None
+
+
+def non_design_skills(skill, tool=None):
+    print('\nI have non design skills in ' + skill + '.')
+    if tool:
+        print('I use ' + tool + ' for this skill.')
+
+
+non_design_skills('desktop publishing', 'indesign')
+non_design_skills('mentorship')
+
+# return values for functions - the function call must always provide a variable in
+# which to store the return value
+# returning a single value
+
+
+def dev_names(first, last):
+    dev_name = first + ' ' + last
+    return dev_name.title()
+
+
+developer = dev_names('engineer', 'dellie')
+print(developer)
+
+# returning a dictionary
+
+
+def dev_specs(names, tool):
+    dev = {
+        'names': names,
+        'tools': tool
+    }
+    return dev
+
+
+developer_spec = dev_specs('Jerry Biko', 'Django & ruby')
+print(developer_spec)
+
+# returning optional values inside a dictionary
+
+
+def experienced_dev(names, tool, experience=None):
+    dev_exp = {'names': names, 'tools': tool}
+    if age:
+        dev_exp['experience'] = experience
+    return dev_exp
+
+
+exp_dev1 = experienced_dev('wayne_o', 'jquerry & js', 3)
+print(exp_dev1)
+
+exp_dev2 = experienced_dev('phil_baphil', 'java & R')
+print(exp_dev2)
