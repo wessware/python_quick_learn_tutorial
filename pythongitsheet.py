@@ -5,7 +5,10 @@ Comment out each separate section to run separate blocks
 PART ONE 
 Intrdouction to basic python! Variables & data structures
 """
+from corncake_module import uji_recipes as ujr
+import corncake_module
 from argparse import Action
+from asyncio import futures
 from distutils.ccompiler import new_compiler
 from email import message
 from typing import OrderedDict
@@ -828,3 +831,94 @@ print(exp_dev1)
 
 exp_dev2 = experienced_dev('phil_baphil', 'java & R')
 print(exp_dev2)
+
+# passing lists as arguments to functions
+
+
+def your_langs(langs):
+    for lang in langs:
+        lang_prefs = 'I develop software using, ' + lang + '.'
+        print(lang_prefs)
+
+
+language_prefs = ['python', 'javascript', 'R', 'java', 'php']
+your_langs(language_prefs)
+
+# functions that modify lists
+
+
+def my_languages(current, future):
+    while current:
+        current_pref = current.pop()
+        print('Currently I prefer: ' + current_pref)
+        future.append(current_pref)
+
+
+future = ['triton', 'julia', 'kotlin', 'objective-c']
+current = ['python', 'javascript']
+my_languages(current, future)
+
+print('\nCurrent languages:', current)
+print('Future languages:', future)
+
+# preventing a function from changing list literals
+
+
+def current_future_langs(now, later):
+    while now:
+        future_langs = now.pop()
+        print('My current prefs: ' + future_langs)
+        later.append(future_langs)
+
+
+current_now = ['python', 'javascript', 'node']
+later = ['triton', 'kotlin']
+
+current_future_langs(current_now[:], later)
+print('\nCurrent languages: ', current_now)
+print('Futures languages:', later)
+
+# passing an arbitrary number of arguments
+
+
+def make_ugali(size, *ingridients):
+    print('Making ' + size + ' ugali.')
+    print('Ingridients:')
+    for ingridient in ingridients:
+        print('- ' + ingridient)
+
+
+make_ugali('small', 'flour', 'water')
+make_ugali('small', 'sorghum', 'cassava', 'water')
+make_ugali('large', 'maize_grade_1', 'water', 'peanuts', 'coconut_milk')
+
+# arbitrary number of Keyword arguments
+
+
+def ugali_recipes(size, water_amount, **additionals):
+    required_ings = {'size': size, 'water': water_amount}
+
+    for key, value in additionals.items():
+        required_ings[key] = value
+
+    return required_ings
+
+
+recipe_1 = ugali_recipes('medium', '2 litres', flour='800g')
+recipe_2 = ugali_recipes('large', '4.5 litres', maize_flour='1000g',
+                         wheat_flour='500g', peanut_flour='300g', coconut_milk='800ml')
+
+print(recipe_1)
+print(recipe_2)
+
+# modules - creating functions in separating files then importing them into your program to simplify your code
+
+corncake_module.make_uji(
+    'medium', 'water', 'sorghum flour', 'peanut flour', 'milk')
+corncake_module.make_uji('small', 'water', 'milk',
+                         'barley flour', 'maize flour')
+
+# using specifically imported funtions from the corncake module
+uji_advanced = ujr('medium', '800 ml', main_flour='maize flour',
+                   additional_flour='peanut flour', tenderizer='coconut milk')
+print(uji_advanced)
