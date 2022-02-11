@@ -922,3 +922,84 @@ corncake_module.make_uji('small', 'water', 'milk',
 uji_advanced = ujr('medium', '800 ml', main_flour='maize flour',
                    additional_flour='peanut flour', tenderizer='coconut milk')
 print(uji_advanced)
+
+# Object Oriented Programming Essentials - Python Classes
+
+
+class Car():
+
+    def __init__(self, make, model, year):
+        """car attribute initialized in the constructor"""
+        self.make = make
+        self.model = model
+        self.year = year
+
+        self.fuel_capacity = 60
+        self.fuel_level = 12
+    """functions inside a class - are class Methods or simply Methods"""
+
+    def fill_tank(self):
+        self.fuel_level = self.fuel_capacity
+        print('Car has now been fueled!')
+
+    def drive(self):
+        print('The car is ready to move!')
+
+    """creating objects from classes"""
+
+
+my_car = Car('toyota', 'g4', 2013)
+print(my_car.make)
+print(my_car.model)
+print(my_car.year)
+
+my_car.fill_tank()
+my_car.drive()
+
+# modifying attributes directly
+new_car = Car('subaru', 'forester', 2021)
+new_car.fuel_level = 5
+
+# using methods to modify and update attributes
+
+
+def level_updater(self, new_level):
+    if new_level <= self.fuel_capacity:
+        self.fuel_level = new_level
+    else:
+        print('Your tank capacity cannot hold that much!')
+# using a method to increment an attribute's current value
+
+
+def add_fuel(self, amount):
+    if(self.fuel_level + amount) <= self.fuel_capacity:
+        self.fuel_level += amount
+        print('Fuel Added!')
+    else:
+        print('Your tank cannot hold that much!')
+# class inheritance - taking on all attributes & methods of the parent class
+# child class can create new attributes and override parent class methods & attributes
+
+
+class ElectricCar(Car):
+    def __init__(self, make, model, year):
+        super().__init__(make, model, year)
+
+        self.battery_size = 70
+        self.charge_level = 0
+
+    def charge(self):
+        self.charge_level = 100
+        print('The vehicle has been fully charged')
+    # child class method to override parent class method fill_tank
+
+    def fill_tank(self):
+        print('\nThis car has no fuel tank!')
+
+
+my_electric = ElectricCar('toyota_hybrid', 'e250', 2019)
+
+# using child and parent class methods
+my_electric.fill_tank()
+my_electric.charge()
+my_electric.drive()
