@@ -5,6 +5,8 @@ Comment out each separate section to run separate blocks
 PART ONE 
 Intrdouction to basic python! Variables & data structures
 """
+import car_module
+from car_module import Car_import, CarElectric_import
 from corncake_module import uji_recipes as ujr
 import corncake_module
 from argparse import Action
@@ -1003,3 +1005,70 @@ my_electric = ElectricCar('toyota_hybrid', 'e250', 2019)
 my_electric.fill_tank()
 my_electric.charge()
 my_electric.drive()
+
+# using class instances as class attributes
+
+
+class Battery():
+    def __init__(self, size=70):
+        self.size = size
+        self.charge_level = 0
+
+    def get_range(self):
+        if self.size == 70:
+            return 240
+        elif self.size == 85:
+            return 270
+
+
+class CarElectric(Car):
+
+    def __init__(self, make, model, year):
+        super().__init__(make, model, year)
+
+        self.battery = Battery()
+
+    def charge(self):
+        self.battery.charge_level = 100
+        print('\nThe vehicle is fully charged!')
+
+
+my_elec_car = CarElectric('tesla', 't60', 2022)
+
+my_elec_car.charge()
+print(my_elec_car.battery.get_range())
+my_elec_car.drive()
+
+# using imported classes
+
+my_tuktuk = Car_import('muthurwa', 'mtk_2909', 2023)
+my_tuktuk.fill_tank_import()
+my_tuktuk.drive_import()
+
+
+tuk_old = car_module.Car_import('gikosh', 'gkh_104', 2011)
+tuk_old.fill_tank_import()
+tuk_old.drive_import()
+
+tuk_modern = car_module.CarElectric_import('babadogo', 'bbdg_a104', '2021')
+tuk_modern.charge_import()
+tuk_modern.drive_import()
+
+# storing class objects inside a list
+petrol_fleet = []
+charge_fleet = []
+
+for _ in range(15):
+    german_car = Car_import('BMW', 'x6', 2019)
+    petrol_fleet.append(german_car)
+for _ in range(5):
+    americas_car = CarElectric_import('tesla', 't4', 2020)
+    charge_fleet.append(americas_car)
+
+for german_car in petrol_fleet:
+    german_car.fill_tank_import()
+for americas_car in charge_fleet:
+    americas_car.charge_import()
+
+print('Petrol cars: ', len(petrol_fleet))
+print('Electric cars: ', len(charge_fleet))
