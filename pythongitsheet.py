@@ -5,6 +5,7 @@ Comment out each separate section to run separate blocks
 PART ONE 
 Intrdouction to basic python! Variables & data structures
 """
+import json
 from importlib.resources import contents
 from modules import car_module
 from modules.car_module import Car_import, CarElectric_import
@@ -1130,3 +1131,102 @@ file_path = '../../female_births.txt'
 with open(file_path) as file_obj:
     lines = f_obj.readlines()
 """
+# The try-except block
+# zero-division error
+try:
+    print(5/0)
+except ZeroDivisionError:
+    print('\nDivision by zero error!')
+
+# file-not-found error
+filename_missing = 'files_adv.txt'  # removed the sub-folder to cause error!
+
+try:
+    with open(filename_missing) as f_obj:
+        lines = f_obj.readlines()
+except FileNotFoundError:
+    msg = '\nCannot find the file {0}.'.format(filename_missing)
+    print(msg)
+
+# the try-except-else block
+# remove docstring operators to run this code
+"""
+print('Dividing two numbers:')
+
+n1 = input('First Number: ')
+n2 = input('Second Number: ')
+
+try:
+    result = int(n1) / int(n2)
+except ZeroDivisionError:
+    print('Zero division error. Enter another number.')
+else:
+    print(result)
+"""
+# catching user input errors and preventing program crashes
+# remove docstring operators to run this code
+"""
+print('Dividing two numbers: ')
+print('Enter Q to quit the program')
+
+while True:
+    n1 = input('\nFirst Number: ')
+    if n1 == 'Q':
+        break
+    n2 = input('Second Number: ')
+    if n2 == 'Q':
+        break
+
+    try:
+        result = int(n1) / int(n2)
+    except ZeroDivisionError:
+        print('Zero division error.')
+    else:
+        print(result)
+"""
+
+# preventing your program from crashing or failing upon encountering an error
+# using the pass statement in an else block
+# included a non-existent file in the list - this error will be ignored by the program.
+files_named = ['text_files/files_adv.txt', 'text_files/files_adv_1.txt',
+               'text_files/git.txt', 'text_files/non_existent.txt']
+
+for file_name in files_named:
+    try:
+        with open(file_name) as file_object:
+            lines = file_object.readlines()
+    except FileNotFoundError:
+        pass
+    else:
+        num_lines = len(lines)
+        msg = '\n{0} has {1} lines.'.format(file_name, num_lines)
+        print(msg)
+
+# storing data with Json
+
+favs = [web_languages, languages, lang_android]
+
+filename = 'langs.json'
+
+with open(filename, 'w') as file_objects:
+    json.dump(favs, file_objects)
+
+# loading data from a json file
+filename = 'langs.json'
+
+with open(filename) as file_obj:
+    fav_langs = json.load(file_obj)
+
+print(fav_langs)
+
+# making sure the stored data exists
+fil_name = 'langs.json'
+
+try:
+    with open(fil_name) as f_object:
+        langs_f = json.load(f_object)
+except FileNotFoundError:
+    msg = 'Cannot find {0}.'.format(fil_name)
+    print(msg)
+else:
+    print(langs_f)
