@@ -5,10 +5,11 @@ Comment out each separate section to run separate blocks
 PART ONE 
 Intrdouction to basic python! Variables & data structures
 """
-import car_module
-from car_module import Car_import, CarElectric_import
-from corncake_module import uji_recipes as ujr
-import corncake_module
+from importlib.resources import contents
+from modules import car_module
+from modules.car_module import Car_import, CarElectric_import
+from modules.corncake_module import uji_recipes as ujr
+from modules import corncake_module
 from argparse import Action
 from asyncio import futures
 from distutils.ccompiler import new_compiler
@@ -234,7 +235,7 @@ my_bull.rest()
 
 
 # working with files in Python
-file = 'git.txt'
+file = 'text_files/git.txt'
 with open(file) as file_object:
     lines = file_object.readlines()
 
@@ -242,12 +243,12 @@ for line in lines:
     print(line)
 
 # writing to a file
-filename = 'git.txt'
+filename = 'text_files/git.txt'
 with open(filename, 'w') as file_object:
     file_object.write('GitHub also provides hosting services for users!')
 
 # appending to a file
-file_named = 'git.txt'
+file_named = 'text_files/git.txt'
 with open(filename, 'a') as file_object:
     file_object.write('\nGit is a great SCVS utility.')
 
@@ -1072,3 +1073,60 @@ for americas_car in charge_fleet:
 
 print('Petrol cars: ', len(petrol_fleet))
 print('Electric cars: ', len(charge_fleet))
+
+#FILES & EXCEPTIONS
+# readiing from a file
+
+filename = 'text_files/files_adv.txt'
+
+with open(filename) as f_obj:
+    contents = f_obj.read()
+
+print(contents)
+
+# reading files line by line
+filename = 'text_files/files_adv_1.txt'
+
+with open(filename) as f_obj:
+    for line in f_obj:
+        print(line.rstrip())
+
+# storing the read lines in a list
+file = 'text_files/files_adv_1.txt'
+
+with open(file) as file_object:
+    lines = file_object.readlines()
+
+for line in lines:
+    print(line.rstrip())
+
+# writing to a file
+filename = 'text_files/files_adv.txt'
+
+with open(filename, 'w') as f:
+    f.write('Careful! Writing to a file deletes all info therein.')
+
+# writing multiples lines to a an empty file
+
+filename = 'text_files/files_adv.txt'
+
+with open(filename, 'w') as file_o:
+    file_o.write(
+        'You are overighting information previously written on the file.')
+    file_o.write('\nTo prevent this, use the a operator instead of w.')
+# appending more information to a file
+
+filename = 'text_files/files_adv.txt'
+
+with open(filename, 'a') as file:
+    file.write('\nThis information will not overight existing information.')
+    file.write('\nThis is made possible by the a operator.')
+
+# File paths
+# readng files with absolutes path's -  local or on the internet
+"""
+file_path = '../../female_births.txt'
+
+with open(file_path) as file_obj:
+    lines = f_obj.readlines()
+"""

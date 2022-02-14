@@ -1,0 +1,4 @@
+You are overighting information previously written on the file.
+To prevent this, use the a operator instead of w.
+This information will not overight existing information.
+This is made possible by the a operator.
