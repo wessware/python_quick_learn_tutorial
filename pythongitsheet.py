@@ -5,6 +5,8 @@ Comment out each separate section to run separate blocks
 PART ONE 
 Intrdouction to basic python! Variables & data structures
 """
+import unittest
+from modules.names_all import full_names
 import json
 from importlib.resources import contents
 from modules import car_module
@@ -1230,3 +1232,24 @@ except FileNotFoundError:
     print(msg)
 else:
     print(langs_f)
+
+# CODE TESTING IN PYTHON
+# testing a function - uses function full_names() in names_all module.
+wesaka = full_names('munyange', 'kennedy', 'ford')
+print(wesaka)
+tone = full_names('clapper', 'wanja', 'abbot')
+print(tone)
+
+# testing a class
+"""
+Test done in the f_records and test_f_records module(s). 
+"""
+
+# using the setUp() in the testing of classes
+"""
+The setUp() is used to track and run each instance that a class is initialized. 
+The method before every test is performed. 
+Any instances you make in setUp() are available in every test you write. 
+
+This test is done in the f_records and test_f_records module(s). 
+"""
