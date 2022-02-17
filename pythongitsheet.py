@@ -5,6 +5,7 @@ Comment out each separate section to run separate blocks
 PART ONE 
 Intrdouction to basic python! Variables & data structures
 """
+from datetime import datetime as dt
 import unittest
 from modules.names_all import full_names
 import json
@@ -1253,3 +1254,37 @@ Any instances you make in setUp() are available in every test you write.
 
 This test is done in the f_records and test_f_records module(s). 
 """
+#Dates & times
+
+# Getting todays date
+today = dt.now()
+date_str = dt.strftime(today, '%m/%d/%Y')
+print(date_str)
+
+# Getting a specific date
+dob_red = dt(1986, 12, 17)
+winter_equinox = dt(year=2022, month=3, day=21)
+print(dob_red)
+print(winter_equinox)
+
+# Other date literals
+"""
+%A - Weekday name - Friday
+%B - Month name - February
+%m  - Month as a number 1 - 12
+%d - Day of the month as a number 1 - 31
+%Y - Four digit year
+%y - Two digit year
+%H - Hour, in 24-hour format
+%I - Hour, in 12-hour format
+&p - AM or PM
+%M - Minutes 00 - 59
+%S - Seconds 00 - 61
+"""
+# converting a string to a datetime object
+dob_cal = dt.strptime('7/2/2011', '%m/%d/%Y')
+print(dob_cal)
+
+# Converting a datetime object to a string
+dob_str = dt.strftime(dob_cal, '%B %d, %Y')
+print(dob_str)
