@@ -1,4 +1,6 @@
 
+from matplotlib import dates as mdates
+from datetime import datetime as dt
 from shutil import which
 import matplotlib.pyplot as plt
 from matplotlib.transforms import Bbox
@@ -125,3 +127,58 @@ plt.savefig('x_values_vs_squares_matplotlib_plot8.png', bbox_inches='tight')
 
 plt.show()
 """
+# temperature plots
+"""
+dates = [
+    dt(2016, 6, 21), dt(2016, 6, 22), dt(2016, 6, 23), dt(2016, 6, 24)
+]
+highs = [57, 68, 64, 59]
+
+fig = plt.figure(dpi=128, figsize=(10, 6))
+plt.plot(dates, highs, c='red')
+plt.title('Daily High Temperatures', fontsize=24)
+plt.ylabel('Temp (F)', fontsize=16)
+
+x_axis = plt.axes().get_xaxis()
+x_axis.set_major_formatter(mdates.DateFormatter('%B %d %Y'))
+
+fig.autofmt_xdate()
+
+plt.savefig('x_values_vs_squares_matplotlib_plot9.png', bbox_inches='tight')
+
+plt.show()
+"""
+
+# multiple plots in one figure
+# x-axis
+"""
+x_values = list(range(11))
+squares = [x**2 for x in x_values]
+cubes = [x**3 for x in x_values]
+
+fig, axarr = plt.subplots(2, 1, sharex=True)
+
+axarr[0].scatter(x_values, squares)
+axarr[0].set_title('Squares')
+
+axarr[1].scatter(x_values, cubes, c='red')
+axarr[1].set_title('Cubes')
+
+plt.savefig('x_values_vs_squares_matplotlib_plot10.png', bbox_inches='tight')
+
+plt.show()
+"""
+
+# y-axis
+
+fig, axarr = plt.subplots(1, 2, sharey=True)
+
+axarr[0].scatter(x_values, squares)
+axarr[0].set_title('Squares')
+
+axarr[1].scatter(x_values, cubes, c='red')
+axarr[1].set_title('Cubes')
+
+plt.savefig('x_values_vs_squares_matplotlib_plot10.png', bbox_inches='tight')
+
+plt.show()
