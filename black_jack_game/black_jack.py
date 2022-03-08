@@ -40,3 +40,23 @@ class Positionable_Card(Card):
 
     def flip(self):
         self.is_face_up = not self.is_face_up
+
+
+card1 = Card('A', 'c')
+card2 = Unprintable_Card('A', 'd')
+card3 = Positionable_Card('A', 'h')
+
+print('Print a Card object: ')
+print(card1)
+
+print('Print an Unprintable Card object: ')
+print(card2)
+
+print('Print a Positionable Card Object: ')
+print(card3)
+
+print('Flipping the Positionable Card object: ')
+card3.flip()
+
+print('Printing the positional card object: ')
+print(card3)
