@@ -1,8 +1,26 @@
-# Comma Separated Values (csv) operations
 
-import json
-import pickle
 import csv
+import pickle
+import json
+
+# Traditional file operations
+
+# Reading from a file
+
+
+def read_info(filename):
+    with open(filename, encoding='utf-8') as file:
+        return file.readlines()
+
+# Writing to a file
+
+
+def write_info(filename, text):
+    with open(filename, 'w', encoding='utf-8') as file:
+        file.write(text)
+
+
+# Comma Separated Values (csv) operations
 
 
 # reading rows from a csv file
