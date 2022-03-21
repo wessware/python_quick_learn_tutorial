@@ -1,34 +1,64 @@
-# Python Curses
+# Comma Separated Values (csv) operations
+
+import json
+import pickle
+import csv
 
 
-# clears the terminal, prints a message and wait to the ESC key action
-from curses import wrapper, curs_set, ascii
-from curses import KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT
+# reading rows from a csv file
+def read_csv_file(filename):
+    with open(filename, encoding='utf-8', newline='') as file:
+        return list(csv.reader(file))
 
-from matplotlib.pyplot import draw
-
-
-def main():
-    wrapper(draw)
+# write rows to a csv file
 
 
-def draw(screen):
-    curs_set(0)
-    screen.nodelay(True)
-    screen.clear()
-    screen.addstr(0, 0, 'Cursed! Press ESC to Exit')
-
-    while screen.getch() != ascii.ESC:
-        pass
+def write_to_csv_file(filename, rows):
+    with open(filename, 'w', encoding='utf-8', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerows(rows)
 
 
-def get_border(screen):
-    from collections import namedtuple
-    P = namedtuple('P', 'x y')
-    height, width = screen.getmaxyx()
+"""
+CSV parameters
+'dialect' - excel
+'delimiter' - "
+'quotechar'
+'doublequote' - True, False
+'skipinitialspace' - True, False
+'lineterminator' - '\r\n, \n'
+'quoting' - 0, 1
+'escapechar' - None
+"""
+# Pickle File operations
 
-    return P(width-1, height-1)
+
+# read object
+
+def read_pickle_file(filename):
+    with open(filename, 'rb') as file:
+        return pickle.load(file)
+
+# write object
 
 
-if __name__ == '__main__':
-    main()
+def write_to_pickle_file(filename, p_object):
+    with open(filename, 'wb') as file:
+        pickle.dump(p_object, file)
+
+
+# JSON file operations
+
+
+# read object from json file
+
+def read_json_file(filename):
+    with open(filename, encoding='utf-8') as file:
+        return json.load(file)
+
+# write object to json file
+
+
+def write_json_obj(filename, j_object):
+    with open(filename, 'w', encoding='utf-8') as file:
+        json.dump(j_object, file, ensure_ascii=False, indent=2)
