@@ -33,7 +33,7 @@ def main():
 
         return Mario(get_rect(1, 1), P(0, 0), False, it.cycle(range(3)))
 
-    def get_titles():
+    def get_tiles():
         positions = [p for p in it.product(range(SIZE), repeat=2) if {*p} & {0, SIZE-1}] +\
             [(randint(1, SIZE-2), randint(2, SIZE-2))
              for _ in range(SIZE**2 // 10)]
@@ -44,10 +44,10 @@ def main():
 
         return pygame.Rect(x*16, y*16, 16, 16)
 
-    run(get_screen(), get_images(), get_mario(), get_titles())
+    run(get_screen(), get_images(), get_mario(), get_tiles())
 
 
-def run(screen, images, mario, titles):
+def run(screen, images, mario, tiles):
     clock = pygame.time.Clock()
 
     while all(event.type != pygame.QUIT for event in pygame.event.get()):
@@ -78,7 +78,7 @@ def update_position(mario, tiles):
     for _ in range(larger_speed):
         mario.spd = stop_on_collision(
             mario.spd, get_boundaries(mario.rect, tiles))
-        new_p = P(*[a + s/larger_speed for a, s in zip(new_p, mario_spd)])
+        new_p = P(*[a + s/larger_speed for a, s in zip(new_p, mario.spd)])
         mario.rect.topleft = new_p
 
 
@@ -92,3 +92,26 @@ def stop_on_collision(spd, bounds):
 
     return P(x=0 if (D.w in bounds and spd.x < 0) or (D.e in bounds and spd.x > 0) else spd.x,
              y=0 if (D.n in bounds and spd.y < 0) or (D.s in bounds and spd.y > 0) else spd.y)
+
+
+def draw(screen, images, mario, tiles, pressed):
+    def get_frame_index():
+        if D.s not in get_boundaries(mario.rect, tiles):
+
+            return 4
+        return next(mario.frame_cycle) if {D.w, D.e} & pressed else 6
+    screen.fill(85, 168, 255)
+
+    mario.facing_left = (D.w in pressed) if {
+        D.w, D.e} & pressed else mario.facing_left
+    screen.blit(images[get_frame_index() + mario.facing_left * 9], mario.rect)
+
+    for rect in tiles:
+        screen.blit(images[18 if {*rect.topleft} &
+                    {0, (SIZE-1)*16} else 19], rect)
+
+    pygame.display.flip()
+
+
+if __name__ == '__main__':
+    main()
