@@ -45,3 +45,50 @@ def main():
         return pygame.Rect(x*16, y*16, 16, 16)
 
     run(get_screen(), get_images(), get_mario(), get_titles())
+
+
+def run(screen, images, mario, titles):
+    clock = pygame.time.Clock()
+
+    while all(event.type != pygame.QUIT for event in pygame.event.get()):
+        keys = {pygame.K_UP: D.n, pygame.K_RIGHT: D.e,
+                pygame.K_DOWN: D.s, pygame.K_LEFT: D.w}
+        pressed = {keys.get(i) for i, on in enumerate(
+            pygame.key.get_pressed()) if on}
+        update_speed(mario, tiles, pressed)
+        update_position(mario, tiles)
+        draw(screen, images, mario, tiles, pressed)
+        clock.tick(28)
+
+
+def update_speed(mario, tiles, pressed):
+    x, y = mario.spd
+    x += 2 * ((D.e in pressed) - (D.w in pressed))
+    x -= x // abs(x) if x else 0
+    y += 1 if D.s not in get_boundaries(mario.rect,
+                                        tiles) else (-10 if D.n in pressed else 0)
+    mario.spd = P(*[max(-limit, min(limit, s))
+                  for limit, s in zip(MAX_SPEED, P(x, y))])
+
+
+def update_position(mario, tiles):
+    new_p = mario.rect.topleft
+    larger_speed = max(abs(s) for s in mario.spd)
+
+    for _ in range(larger_speed):
+        mario.spd = stop_on_collision(
+            mario.spd, get_boundaries(mario.rect, tiles))
+        new_p = P(*[a + s/larger_speed for a, s in zip(new_p, mario_spd)])
+        mario.rect.topleft = new_p
+
+
+def get_boundaries(rect, tiles):
+    deltas = {D.n: P(0, -1), D.e: P(1, 0), D.s: P(0, 1), D.w: P(-1, 0)}
+
+    return {d for d, delta in deltas.items() if rect.move(delta).collidelist(tiles) != -1}
+
+
+def stop_on_collision(spd, bounds):
+
+    return P(x=0 if (D.w in bounds and spd.x < 0) or (D.e in bounds and spd.x > 0) else spd.x,
+             y=0 if (D.n in bounds and spd.y < 0) or (D.s in bounds and spd.y > 0) else spd.y)
